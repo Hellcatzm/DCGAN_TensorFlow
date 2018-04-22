@@ -36,4 +36,4 @@ IMAGE_DEPTH = 3
 BATCH_SIZE = 64
 ```
 当时为了方便，这些参量的设置也放在了TFR_process.py中，这是因为我的数据读取函数`batch_from_tfr`位于此文件中，该函数可以设置传入网络的图片大小。
-![DCGAN项目图结构](https://images2017.cnblogs.com/blog/1161096/201802/1161096-20180202104054187-816979389.png)  
+![](https://images2017.cnblogs.com/blog/1161096/201802/1161096-20180202104054187-816979389.png"DCGAN项目图结构")  
