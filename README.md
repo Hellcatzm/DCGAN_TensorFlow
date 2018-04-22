@@ -11,6 +11,7 @@ TFR_process.py，TFRecode数据生成以及处理脚本
 ops.py，层封装脚本
 DC_GAN.py，DC_GAN原型机
 utils.py，格式化绘图、保存图片函数，开源项目直接找来的
+![](https://images2017.cnblogs.com/blog/1161096/201802/1161096-20180202104054187-816979389.png "DCGAN项目图结构") 
 
 ## 3、实验步骤
 先运行TFR_process.py产生TFRecord数据，
