@@ -7,10 +7,11 @@ DCGAN简单实现
 数据在预处理时采用了原像素数据除以127.5减去1的操作，使得输出值保持在0~1之间，这样配合sigmoid激活函数可以很好的模拟学习。
 
 ## 2、目录介绍
-TFR_process.py，TFRecode数据生成以及处理脚本<br>
-ops.py，层封装脚本<br>
-DC_GAN.py，DC_GAN原型机<br>
-utils.py，格式化绘图、保存图片函数，开源项目直接找来的<br>
+TFR_process.py：TFRecode数据生成以及处理脚本<br>
+ops.py：层封装脚本<br>
+DC_GAN.py：DC_GAN原型机<br>
+utils.py：格式化绘图、保存图片函数，开源项目直接找来的<br>
+Data_Set/cartoon_faces：此处目录下放置头像图片
 
 ## 3、实验步骤
 先运行TFR_process.py产生TFRecord数据，
