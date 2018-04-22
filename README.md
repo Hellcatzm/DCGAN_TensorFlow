@@ -13,8 +13,8 @@ DC_GAN原型机，DC_GAN.py
 
 ## 实验步骤
 先运行TFR_process.py产生TFRecord数据，
-本部分涉及参量如下：
-'''Python
+本部分涉及参量如下（位于TFR_process.py的起始位置）：
+```Python
 # 定义每个TFR文件中放入多少条数据
 INSTANCES_PER_SHARD = 10000
 # 图片文件存放路径
@@ -23,6 +23,15 @@ IMAGE_PATH = './Data_Set/cartoon_faces'
 IMAGE_LABEL_LIST = 'images_&_labels.txt'
 # TFR文件保存路径
 TFR_PATH = './TFRecord_Output'
-'''
+```
 
-然后再运行DC_GAN.py使用前面的数据训练DC_GAN。
+然后再运行DC_GAN.py使用前面的数据训练DC_GAN，
+```Python
+# TFR保存图像尺寸
+IMAGE_HEIGHT = 48
+IMAGE_WIDTH = IMAGE_HEIGHT
+IMAGE_DEPTH = 3
+# 训练batch尺寸
+BATCH_SIZE = 64
+```
+当时为了方便，这些参量的设置也放在了TFR_process.py中，这是因为我的数据读取函数`batch_from_tfr`位于此文件中，该函数可以设置传入网络的图片大小。
