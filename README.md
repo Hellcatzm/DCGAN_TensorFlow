@@ -9,7 +9,7 @@ DCGAN简单实现
 ## 2、目录介绍
 TFR_process.py：TFRecode数据生成以及处理脚本<br>
 ops.py：层封装脚本<br>
-DC_GAN.py：DC_GAN原型机<br>
+DC_GAN.py：DC_GAN原型<br>
 utils.py：格式化绘图、保存图片函数，开源项目直接找来的<br>
 Data_Set/cartoon_faces：此处目录下放置头像图片
 
