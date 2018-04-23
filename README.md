@@ -13,6 +13,7 @@ ops.py：层封装脚本<br>
 DCGAN_class.py：使用类的方式实现DC_GAN，因为是重点所以代码中给出了详尽的注释<br>
 DCGAN_function.py：使用函数的方式实现DC_GAN，因为上面版本受开源项目影响较大，代码繁杂，这里进行了改写，采取了更为清晰的写法<br>
 utils.py：格式化绘图、保存图片函数，开源项目直接找来的<br>
+DCGAN_reload.py：利用已经训练好的模型生成一组头像<br>
 Data_Set/cartoon_faces：此处目录下放置头像图片
 
 ## 3、实验步骤
@@ -50,6 +51,11 @@ IMAGE_DEPTH = 3
 BATCH_SIZE = 64
 ```
 这是因为我的数据读取函数`batch_from_tfr`位于此文件中，该函数可以设置传入网络的图片大小。 
+
+已经训练好了模型了的话如下操作即可直接生成一组图像。
+```Python
+python DCGAN_reload.py
+```
 
 ## 4、图结构
 ![](https://images2017.cnblogs.com/blog/1161096/201802/1161096-20180202104054187-816979389.png "DCGAN项目图结构") 
