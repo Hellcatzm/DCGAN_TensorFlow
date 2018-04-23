@@ -2,7 +2,7 @@ DCGAN简单实现
 ===========
 [动漫头像地址（密码g5qa）](https://pan.baidu.com/share/init?surl=eSifHcA)  
 [『TensorFlow』DCGAN生成动漫人物头像_下](http://www.cnblogs.com/hellcat/p/8340491.html)  
-根据网上开源项目以及自己的理解尝试出的DCGAN实现，重点在于熟悉TensorFlow对于这种特殊网络结构的控制流程学习
+根据网上开源项目以及自己的理解尝试出的DCGAN实现，重点在于熟悉TensorFlow对于这种特殊网络结构的控制流程学习，结果展示以及训练过程的分析见上面博客。
 
 ## 1、预处理
 数据在预处理时采用了原像素数据除以127.5减去1的操作，使得输出值保持在0~1之间，这样配合sigmoid激活函数可以很好的模拟学习。
