@@ -10,7 +10,8 @@ DCGAN简单实现
 ## 2、目录介绍
 TFR_process.py：TFRecode数据生成以及处理脚本<br>
 ops.py：层封装脚本<br>
-DC_GAN.py：DC_GAN原型，因为是重点所以代码中给出了详尽的注释<br>
+DCGAN_class.py：使用类的方式实现DC_GAN，因为是重点所以代码中给出了详尽的注释<br>
+DCGAN_function.py：使用函数的方式实现DC_GAN，因为上面版本受开源项目影响较大，代码繁杂，这里进行了改写，采取了更为清晰的写法<br>
 utils.py：格式化绘图、保存图片函数，开源项目直接找来的<br>
 Data_Set/cartoon_faces：此处目录下放置头像图片
 
@@ -33,7 +34,11 @@ TFR_PATH = './TFRecord_Output'
 
 然后再运行DC_GAN.py使用前面的数据训练DC_GAN，
 ```Shell
-python DC_GAN.py
+python DCGAN_class.py
+```
+或者
+```Shell
+python DCGAN_function.py
 ```
 当时为了方便，这些参量的设置也放在了TFR_process.py中，
 ```Python
