@@ -56,18 +56,17 @@ class DCGAN(object):
         self.batch_size = batch_size  # 训练批次图数目
         self.input_height = input_height  # 图片高度
         self.input_width = input_width  # 图片宽度
-
-        # inputs = tf.placeholder(tf.float32,
-        #                         [self.batch_size, self.input_height,
-        #                          self.input_width, self.c_dim], name='real_images')
+        
         self.inputs, _ = TFR_process.batch_from_tfr()
         self.z = tf.placeholder(tf.float32, [None, self.z_dim], name='z')
-
+        
+        # real数据通过判别器
         d, d_logits = self.discriminator(self.inputs, reuse=False)
-
+        # fake数据生成
         g = self.generator(self.z)
+        # fake数据通过判别器，注意来源不同的数据流流经同一结构，要reuse
         d_, d_logits_ = self.discriminator(g, reuse=True)
-
+        # 用生成器生成示例的节点，其数据来源于上面的g相同，故图不需要reuse
         self.s = self.generator(self.z, train=False)
 
         # 损失函数生成
@@ -110,9 +109,10 @@ class DCGAN(object):
     def train(self):
         self.sess.run([tf.global_variables_initializer(),
                        tf.local_variables_initializer()])  # <-----线程相关不要忘了它
-        with self.sess.as_default():
-
-            # counter_ = int(self.load())
+        
+       with self.sess.as_default():
+        
+            # 加载预训练模型
             if not os.path.exists("./logs/model"):
                 os.makedirs("./logs/model")
             ckpt = tf.train.get_checkpoint_state("./logs/model")
@@ -122,35 +122,33 @@ class DCGAN(object):
             else:
                 print("[*] Failed to find a checkpoint")
 
+            # 线程相关对象初始化
             coord = tf.train.Coordinator()
             threads = tf.train.start_queue_runners(sess=self.sess, coord=coord)
 
-            # for pro_step in range(30):
-            #     batch_z = np.random.uniform(-1, 1, [TFR_process.BATCH_SIZE, self.z_dim]).astype(np.float32)
-            #     _, summary_str = self.sess.run([self.d_optim, self.d_sum], feed_dict={self.z: batch_z})
-            #     error_d_fake = self.d_loss_fake.eval({self.z: batch_z})
-            #     error_d_real = self.d_loss_real.eval()
-            #     print("d_loss: {0:.8f}".format(error_d_fake + error_d_real))
-
+            # 进入循环
             for epoch in range(EPOCH):
                 for step in range(STEPS):
                     counter = epoch*STEPS+step
+                    # 准备数据
                     batch_z = np.random.uniform(-1, 1, [TFR_process.BATCH_SIZE, self.z_dim]).astype(np.float32)
-
+                    
+                    # 训练部分，每训练一次判别器需要训练两次生成器 
                     _, summary_str = self.sess.run([self.d_optim, self.d_sum], feed_dict={self.z: batch_z})
-                    self.writer.add_summary(summary_str, counter)
-
+                    self.writer.add_summary(summary_str, counter) 
                     _, summary_str = self.sess.run([self.g_optim, self.g_sum], feed_dict={self.z: batch_z})
                     self.writer.add_summary(summary_str, counter)
                     _, summary_str = self.sess.run([self.g_optim, self.g_sum], feed_dict={self.z: batch_z})
                     self.writer.add_summary(summary_str, counter)
-
+                    
+                    # 获取loss值进行展示
                     error_d_fake = self.d_loss_fake.eval({self.z: batch_z})
                     error_d_real = self.d_loss_real.eval()
                     error_g = self.g_loss.eval({self.z: batch_z})
                     print("epoch: {0}, step: {1}".format(epoch, step))
                     print("d_loss: {0:.8f}, g_loss: {1:.8f}".format(error_d_fake + error_d_real, error_g))
-
+                    
+                    # 模型保存与中间结果展示
                     if np.mod(step, 50) == 0:
                         # self.save(epoch, step, counter + counter_)
                         self.saver.save(self.sess, "./logs/model/DCGAN.model", global_step=epoch*STEPS+step)
@@ -159,9 +157,7 @@ class DCGAN(object):
                         samples = self.sess.run(self.s, feed_dict={self.z: sample_z})
                         utils.save_images(samples, utils.image_manifold_size(samples.shape[0]),
                                           './train_{:02d}_{:04d}.png'.format(epoch, step))
-                        # for sample in samples:
-                        #     plt.imshow(np.clip(sample, 0, 255).astype(np.uint8))
-
+            # 线程控制对象关闭
             coord.request_stop()
             coord.join(threads)
 
@@ -206,33 +202,6 @@ class DCGAN(object):
             h4 = deconv2d(h3, [self.batch_size, s_h, s_w, self.c_dim], scope='g_h4')
 
             return tf.nn.tanh(h4)
-
-    # @property
-    # def model_dir(self):
-    #     return "{0}".format(IMAGE_PATH.split("/")[-1])
-    #
-    # def save(self, epoch, step, counter):
-    #     model_name = os.path.join("DCGAN.model_{0}_{1}".format(epoch, step))
-    #     checkpoint_dir = os.path.join("./logs", self.model_dir)
-    #     if not os.path.exists(checkpoint_dir):
-    #         os.makedirs(checkpoint_dir)
-    #     print(model_name, counter)
-    #     self.saver.save(self.sess,
-    #                     os.path.join(checkpoint_dir, model_name),
-    #                     global_step=counter)
-    #
-    # def load(self):
-    #     print(" [*] Reading checkpoints...")
-    #     checkpoint_dir = os.path.join("./logs", self.model_dir)
-    #     ckpt = tf.train.get_checkpoint_state(checkpoint_dir)
-    #     if ckpt and ckpt.model_checkpoint_path:
-    #         ckpt_name = os.path.basename(ckpt.model_checkpoint_path)
-    #         self.saver.restore(self.sess, os.path.join(checkpoint_dir, ckpt_name))
-    #         print(" [*] Success to read {}".format(ckpt_name))
-    #         return ckpt_name.split("-")[-1]  # 提取最新模型的训练次数
-    #     else:
-    #         print(" [*] Failed to find a checkpoint")
-    #         return 0
 
 
 if __name__ == "__main__":
