@@ -1,7 +1,13 @@
 DCGAN简单实现
 ===========
-[动漫头像地址（密码g5qa）](https://pan.baidu.com/share/init?surl=eSifHcA)  
+## 相关资源
+数据来源：
+[动漫头像地址（密码g5qa）](https://pan.baidu.com/share/init?surl=eSifHcA) 
+结果分析：
 [『TensorFlow』DCGAN生成动漫人物头像_下](http://www.cnblogs.com/hellcat/p/8340491.html)  
+数据预处理程序`TFR_process.py`介绍：
+[『TensorFlow』读书笔记_TFRecord学习](http://www.cnblogs.com/hellcat/p/8146748.html)  
+[『TensorFlow』TFR数据预处理探究以及框架搭建](http://www.cnblogs.com/hellcat/p/8287831.html)  
 根据网上开源项目以及自己的理解尝试出的DCGAN实现，重点在于熟悉TensorFlow对于这种特殊网络结构的控制流程学习，结果展示以及训练过程的分析见上面博客。
 
 ## 1、预处理
