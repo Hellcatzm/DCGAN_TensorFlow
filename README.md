@@ -14,20 +14,20 @@ DCGAN简单实现
 数据在预处理时采用了原像素数据除以127.5减去1的操作，使得输出值保持在0~1之间，这样配合sigmoid激活函数可以很好的模拟学习。
 
 ## 2、目录介绍
-TFR_process.py：TFRecode数据生成以及处理脚本<br>
-ops.py：层封装脚本<br>
-DCGAN_class.py：使用类的方式实现DC_GAN，因为是重点所以代码中给出了详尽的注释<br>
-DCGAN_function.py：使用函数的方式实现DC_GAN，因为上面版本受开源项目影响较大，代码繁杂，这里进行了改写，采取了更为清晰的写法<br>
-utils.py：格式化绘图、保存图片函数，开源项目直接找来的<br>
-DCGAN_reload.py：利用已经训练好的模型生成一组头像<br>
-Data_Set/cartoon_faces：此处目录下放置头像图片
+`TFR_process.py`：TFRecode数据生成以及处理脚本<br>
+`ops.py`：层封装脚本<br>
+`DCGAN_class.py`：使用类的方式实现DC_GAN，因为是重点所以代码中给出了详尽的注释<br>
+`DCGAN_function.py`：使用函数的方式实现DC_GAN，因为上面版本受开源项目影响较大，代码繁杂，这里进行了改写，采取了更为清晰的写法<br>
+`utils.py`：格式化绘图、保存图片函数，开源项目直接找来的<br>
+`DCGAN_reload.py`：利用已经训练好的模型生成一组头像<br>
+`Data_Set`/`cartoon_faces`：此处目录下放置头像图片
 
 ## 3、实验步骤
-先运行TFR_process.py产生TFRecord数据：
+先运行`TFR_process.py`产生TFRecord数据：
 ```Shell
 python TFR_process.py
 ```
-本部分涉及参量如下（位于TFR_process.py的起始位置）：
+本部分涉及参量如下（位于`TFR_process.py`的起始位置）：
 ```Python
 # 定义每个TFR文件中放入多少条数据
 INSTANCES_PER_SHARD = 10000
@@ -39,7 +39,7 @@ IMAGE_LABEL_LIST = 'images_&_labels.txt'
 TFR_PATH = './TFRecord_Output'
 ```
 
-然后再运行DC_GAN.py使用前面的数据训练DC_GAN，
+然后再运行`DC_GAN.py`使用前面的数据训练DC_GAN，
 ```Shell
 python DCGAN_class.py
 ```
@@ -47,7 +47,7 @@ python DCGAN_class.py
 ```Shell
 python DCGAN_function.py
 ```
-当时为了方便，这些参量的设置也放在了TFR_process.py中，
+当时为了方便，这些参量的设置也放在了`TFR_process.py`中，
 ```Python
 # TFR保存图像尺寸
 IMAGE_HEIGHT = 48
