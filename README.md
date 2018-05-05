@@ -68,4 +68,4 @@ python DCGAN_reload.py
 
 
 ## 4、结果展示
-![](https://images2017.cnblogs.com/blog/1161096/201802/1161096-20180202152406687-1779198084.png)
+![](https://github.com/Hellcatzm/DCGAN_TensorFlow/blob/master/%E7%BB%93%E6%9E%9C%E7%A4%BA%E6%84%8F%E5%9B%BE.png)
