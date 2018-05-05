@@ -66,5 +66,3 @@ python DCGAN_reload.py
 ```
 即可直接生成一组图像。
 
-## 4、图结构
-![](https://images2017.cnblogs.com/blog/1161096/201802/1161096-20180202104054187-816979389.png "DCGAN图")
