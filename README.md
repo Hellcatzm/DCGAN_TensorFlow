@@ -66,6 +66,8 @@ python DCGAN_reload.py
 ```
 即可直接生成一组图像。
 
+## 4、网络示意
+![](https://github.com/Hellcatzm/DCGAN_TensorFlow/blob/master/%E7%BD%91%E7%BB%9C%E7%BB%93%E6%9E%84%E7%A4%BA%E6%84%8F%E5%9B%BE.png)
 
-## 4、结果展示
+## 5、结果展示
 ![](https://github.com/Hellcatzm/DCGAN_TensorFlow/blob/master/%E7%BB%93%E6%9E%9C%E7%A4%BA%E6%84%8F%E5%9B%BE.png)
