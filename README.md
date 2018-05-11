@@ -60,7 +60,7 @@ BATCH_SIZE = 64
 ```
 这是因为我的数据读取函数`batch_from_tfr`位于此文件中，该函数可以设置传入网络的图片大小。 
 
-已经训练好了模型了的话如下操作，
+已经训练好模型了的话如下操作，
 ```Python
 python DCGAN_reload.py
 ```
